@@ -1,8 +1,7 @@
 import mongo from 'mongoose';
 
 
-const URI = 'mongodb+srv://Shishir:Shishir%404414@cluster0.yc8jr.mongodb.net/SnapIT?retryWrites=true&w=majority&appName=Cluster0';
-
+const URI = process.env.MONGO_DB_URI;
 
 
 const connectDB = async () => {

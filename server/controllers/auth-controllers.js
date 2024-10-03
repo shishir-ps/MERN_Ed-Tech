@@ -1,3 +1,7 @@
+import User from "../models/user-model.js";
+
+
+
 // ++++++++++++++++++++++++++++
 //     **Home Page**
 // ++++++++++++++++++++++++++++
@@ -9,9 +13,9 @@ const home = async (req, res) => {
             .send(`From controller SERVER OK`);
     } catch (error) {
         console.error(error);
-        res 
+        res
             .status(400)
-            .json({msg: 'PAGE NOT FOUND'});
+            .json({ msg: 'PAGE NOT FOUND' });
     }
 };
 
@@ -22,17 +26,24 @@ const home = async (req, res) => {
 
 const register = async (req, res) => {
     try {
-        console.log(req.body);
+        const { email, username, password, phone } = req.body;
+        
+        const userExist = await User.findOne({ email: email });
+        if (userExist) {
+            return res
+                .status(400)
+                .json({ message: "user already exist" });
+        }
+        const createdUser = await User.create({ email, username, password, phone });
         res
             .status(200)
-            .json({message :req.body});
-                
+            .json({ message: createdUser });
 
     } catch (error) {
         console.error(error);
-        res 
+        res
             .status(400)
-            .json({msg: 'PAGE NOT FOUND'});
+            .json({ msg: 'PAGE NOT FOUND' });
     }
 
 };
