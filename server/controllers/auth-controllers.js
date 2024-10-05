@@ -34,10 +34,12 @@ const register = async (req, res) => {
                 .status(400)
                 .json({ message: "user already exist" });
         }
+        
         const createdUser = await User.create({ email, username, password, phone });
+        createdUser.generateJwtToken
         res
-            .status(200)
-            .json({ message: createdUser });
+            .status(201)
+            .json({ message: createdUser, JWT: await createdUser.generateToken(), ID: createdUser._id.toString() });
 
     } catch (error) {
         console.error(error);
