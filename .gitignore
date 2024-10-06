@@ -1,10 +1,2 @@
 node_modules
 .env
-
-.vs/ProjectSettings.json
-.vs/SnapIT/FileContentIndex/cb6519ea-f2fd-4c1f-bae7-0bbf330dd780.vsidx
-.vs/SnapIT/config/applicationhost.config
-.vs/SnapIT/v17/.wsuo
-.vs/SnapIT/v17/DocumentLayout.json
-.vs/VSWorkspaceState.json
-.vs/slnx.sqlite
