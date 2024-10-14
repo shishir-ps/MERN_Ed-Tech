@@ -33,7 +33,7 @@ const register = async (req, res) => {
         const validUsername = await User.findOne({ username: username });
         if (userExist || validUsername) {
             return res
-                .status(400)
+                .status(401)
                 .json({ message: "user already exist" });
         }
 
@@ -70,11 +70,11 @@ const login = async (req, res) => {
                 .status(400)
                 .json({ message: "Invalid Email || Password" });
         }
-        const isPasswordValid = await bcrypt.compare(password, userExist.password);
+        const isPasswordValid = await userExist.comparePassword(password);
         if (isPasswordValid) {
             
             res
-                .status(401)
+                .status(200)
                 .json({
                     message: "Login Successful",
                     JWT: await userExist.generateToken(),
